@@ -157,11 +157,11 @@ Feel free to fork this repository and create pull requests to add features or fi
 # License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
+ 
 Future Enhancements
 
         •       Add role-based access (e.g., manager, cashier).
         •       Implement real-time updates using WebSockets.
         •       Generate detailed sales reports.
 
-With this README, you should have all the information needed to install, run, and understand the project. The features can be pronounced, and the backend can be modified as required for future expansion..
+With this README, you should have all the information needed to install, run, and understand the project. The features can be pronounced, and the backend can be modified as required for future expansion.. 
