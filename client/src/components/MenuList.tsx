@@ -5,10 +5,10 @@ import type { MenuListData } from "../interfaces/MenuListData";
 
 // Define the props for the component
 interface MenuListProps {
-    users: MenuListData[] | null; // users can be an array of UserData objects or null
+    menuLists: MenuListData[] | null; // users can be an array of UserData objects or null
 }
 
-const UserList: React.FC<MenuListProps> = ({ menuLists }) => {
+const MenuList: React.FC<MenuListProps> = ({ menuLists }) => {
     return (
         <>
             <h2 className="pb-5">
@@ -26,4 +26,4 @@ const UserList: React.FC<MenuListProps> = ({ menuLists }) => {
     );
 };
 
-export default UserList;
+export default MenuList;
