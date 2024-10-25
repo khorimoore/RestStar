@@ -164,4 +164,4 @@ Future Enhancements
         •       Implement real-time updates using WebSockets.
         •       Generate detailed sales reports.
 
-With this README, you should have all the information needed to install, run, and understand the project. The features can be pronounced, and the backend can be modified as required for future expansion..
+With this README, you should have all the information needed to install, run, and understand the project. The features can be pronounced, and the backend can be modified as required for future expansion.. 
