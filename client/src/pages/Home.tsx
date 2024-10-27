@@ -5,6 +5,7 @@ import ErrorPage from "./ErrorPage";
 import MenuList from '../components/MenuList';
 import CustomerOrders from '../components/CustomerOrders';
 import auth from '../utils/auth';
+import Users from '../components/Users'
 
 const Home = () => {
 
@@ -71,6 +72,9 @@ const Home = () => {
                             <div className="col-9 m-5 shadow-lg">
                                 <MenuList menuLists={foodItems} />
                             </div>    
+                            <div className="col-9 m-5 shadow-lg">
+                                <Users users={users} />
+                            </div>   
                         </div>
                 
                     
