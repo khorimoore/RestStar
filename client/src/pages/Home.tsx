@@ -88,6 +88,7 @@ const Home = () => {
                             </div>
                       
                            
+
                             <div className="col-9 m-5 shadow-lg">
                                 <MenuList menuLists={foodItems} addOrders={addOrders}/>
                             </div>    
