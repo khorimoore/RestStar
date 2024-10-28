@@ -1,6 +1,7 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
+import type { CustomerOrderData } from "../interfaces/CustomerOrderData";
 import ErrorPage from "./ErrorPage";
 import MenuList from '../components/MenuList';
 import CustomerOrders from '../components/CustomerOrders';
@@ -8,9 +9,18 @@ import auth from '../utils/auth';
 
 const Home = () => {
 
+
+
+
+
+
+
+
+
     const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);
     const [loginCheck, setLoginCheck] = useState(false);
+    const [customerOrderList, setCustomerOrderList] = useState([] as CustomerOrderData[]);
 
     useEffect(() => {
         if (loginCheck) {
@@ -37,6 +47,15 @@ const Home = () => {
             setError(true);
         }
     }
+    const addOrders = (id: number) => {
+        // Find the food item by ID
+        const foodItem = foodItems.filter(item => item.id === id);
+        if (foodItem) { // If a food item is found
+            // Update the customer order list
+            setCustomerOrderList(prev=>[...prev, ...foodItem]);
+        }
+    };
+
     const foodItems = [
         { id: 1, name: "Burger", price: 5.99 },
         { id: 2, name: "Pizza", price: 8.99 },
@@ -64,12 +83,13 @@ const Home = () => {
                     
                         <div className="row">
                             <div className="col-2 shadow-lg text-break">
-                                <CustomerOrders customerOrders={[{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10}]}/>     
+                                {/* <CustomerOrders customerOrders={[{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10}]}/>      */}
+                                <CustomerOrders customerOrders={customerOrderList} />
                             </div>
                       
                            
                             <div className="col-9 m-5 shadow-lg">
-                                <MenuList menuLists={foodItems} />
+                                <MenuList menuLists={foodItems} addOrders={addOrders}/>
                             </div>    
                         </div>
                 
