@@ -53,12 +53,12 @@ const Home = () => {
         }
     };
 
-    const onChangeQuantityHandler= (value:string,id:number)=>{// function to handle Onchanging quantity change so it refelects price Accordingly
+    const onChangeQuantityHandler= (value:string,foodItemid:number,customerorderIndex:number)=>{// function to handle Onchanging quantity change so it refelects price Accordingly
       
-             customerOrderList.filter(item => //filter the customerorderlist to refelect the price with its quantity
+             customerOrderList.filter((item,index) => //filter the customerorderlist to refelect the price with its quantity
                 {
-                    const foodItem = foodItems.filter(item => item.id === id); // get the base price from 
-                    if(item.id === id){
+                    const foodItem = foodItems.filter(item => item.id === foodItemid); // get the base price from 
+                    if(item.id === foodItemid && customerorderIndex === index){
                         item.price = foodItem[0].price* parseInt(value); //set the price with the quantity multiplier
                     }
                     return item;
@@ -71,6 +71,8 @@ const Home = () => {
     const customerOrderListformHandler = (customerName:string)=>{
        if(!customerName){
         alert("Please Add Customer Name to Order..");
+       }else{
+        console.log(customerOrderList);
        }
         
     }

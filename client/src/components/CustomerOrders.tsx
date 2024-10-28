@@ -5,7 +5,7 @@ import { CustomerOrderData } from '../interfaces/CustomerOrderData';
 interface CustomerOrderProps {
     customerOrders: CustomerOrderData[] | null; // users can be an array of UserData objects or null
     totalPrice:number;
-    onChangeQuantityHandler:(value:string,id:number)=>void;
+    onChangeQuantityHandler:(value:string,foodItemId:number,customerorderIndex:number)=>void;
     customerOrderListformHandler:(customerName:string)=>void
     
 }
@@ -50,7 +50,7 @@ const CustomerList: React.FC<CustomerOrderProps> = ({ customerOrders , totalPric
                             {customerOrder.name}
                         </td>
                         <td>
-                            <select onChange={(e)=>onChangeQuantityHandler(e.target.value,customerOrder.id)}>
+                            <select onChange={(e)=>onChangeQuantityHandler(e.target.value,customerOrder.id,index)}>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
                                 <option value='3'>3</option>
