@@ -9,14 +9,6 @@ import auth from '../utils/auth';
 
 const Home = () => {
 
-
-
-
-
-
-
-
-
     const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);//error check
     const [loginCheck, setLoginCheck] = useState(false);//login check
@@ -43,9 +35,9 @@ const Home = () => {
     const fetchUsers = async () => {
         try {
             const data = await retrieveUsers();
-            setUsers(data)
+            setUsers(data);
         } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
+            console.error('Failed to retrieve users:', err);
             setError(true);
         }
     }
@@ -103,9 +95,7 @@ const Home = () => {
             {
                 loginCheck ? (
                     <div className='login-notice'>
-                        <h1>
-                            Login to take Orders!
-                        </h1>
+                        <h1>Login to take Orders!</h1>
                     </div>
                 ) : (
                     
@@ -120,8 +110,7 @@ const Home = () => {
                                 <MenuList menuLists={foodItems} addOrders={addOrders}/>
                             </div>    
                         </div>
-                
-                    
+                    </div>
                 )}
         </>
     );

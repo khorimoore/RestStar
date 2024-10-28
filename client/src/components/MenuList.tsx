@@ -5,6 +5,7 @@ import type { MenuListData } from "../interfaces/MenuListData";
 
 // Define the props for the component
 interface MenuListProps {
+
     menuLists: MenuListData[] | null; // users can be an array of MenuData objects or null
     addOrders(id:number):void
 }
@@ -13,7 +14,7 @@ const MenuList: React.FC<MenuListProps> = ({ menuLists,addOrders }) => {
     return (
         <>
             <h2 className="pb-5">
-                Check out all your MenuList !
+                Check out all the MenuList !
             </h2>
             <div className="row align-center mb-5 shadow-sm" >
             {menuLists && menuLists.map((menuList) => (
@@ -28,3 +29,4 @@ const MenuList: React.FC<MenuListProps> = ({ menuLists,addOrders }) => {
 };
 
 export default MenuList;
+
