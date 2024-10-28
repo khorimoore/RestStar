@@ -60,7 +60,7 @@ const CustomerList: React.FC<CustomerOrderProps> = ({ customerOrders , totalPric
                             </select>
                         </td>
                         <td>
-                            {customerOrder.price}
+                            {customerOrder.price.toFixed(2)}
                         </td>
                                         
                     </tr>
@@ -75,7 +75,7 @@ const CustomerList: React.FC<CustomerOrderProps> = ({ customerOrders , totalPric
                     <input className='' value={customerName}  name='customername' onChange={(e) => setCustomerName(e.target.value)}></input>
                 </div>
                 <div className='col-12'>
-                <span>Total: {totalPrice}</span>
+                <span>Total: {totalPrice.toFixed(2)}</span>
                 </div>
                 <div className='col-12'>
                     
