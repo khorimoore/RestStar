@@ -10,10 +10,11 @@ const CustomerList: React.FC<CustomerOrderProps> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('/api/orders');
+        const response = await fetch('/api/orders'); 
+        
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -32,7 +33,7 @@ const CustomerList: React.FC<CustomerOrderProps> = () => {
 
   if (loading) return <div>Loading...</div>; 
   if (error) return <div>{error}</div>; 
-  
+
 
   return (
     <div>
