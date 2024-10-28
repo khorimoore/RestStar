@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, FormEvent } from "react";
 import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import type { CustomerOrderData } from "../interfaces/CustomerOrderData";
@@ -18,9 +18,11 @@ const Home = () => {
 
 
     const [users, setUsers] = useState<UserData[]>([]);
-    const [error, setError] = useState(false);
-    const [loginCheck, setLoginCheck] = useState(false);
-    const [customerOrderList, setCustomerOrderList] = useState([] as CustomerOrderData[]);
+    const [error, setError] = useState(false);//error check
+    const [loginCheck, setLoginCheck] = useState(false);//login check
+    const [customerOrderList, setCustomerOrderList] = useState([] as CustomerOrderData[]);//customerOrderList
+    const [totalPrice, setTotalPrice] = useState<number>(0);//total price
+ 
 
     useEffect(() => {
         if (loginCheck) {
@@ -53,8 +55,34 @@ const Home = () => {
         if (foodItem) { // If a food item is found
             // Update the customer order list
             setCustomerOrderList(prev=>[...prev, ...foodItem]);
+            const sum = foodItem.reduce((accumulator, current) => accumulator + current.price, 0);
+            setTotalPrice(prev=>prev+sum);
+           
         }
     };
+
+    const onChangeQuantityHandler= (value:string,id:number)=>{// function to handle Onchanging quantity change so it refelects price Accordingly
+      
+             customerOrderList.filter(item => //filter the customerorderlist to refelect the price with its quantity
+                {
+                    const foodItem = foodItems.filter(item => item.id === id); // get the base price from 
+                    if(item.id === id){
+                        item.price = foodItem[0].price* parseInt(value); //set the price with the quantity multiplier
+                    }
+                    return item;
+                });
+                const sum = customerOrderList.reduce((accumulator, current) => accumulator+current.price, 0);//calculate total price
+                setTotalPrice(sum); //set Total Price
+
+    }
+    
+    const customerOrderListformHandler = (customerName:string)=>{
+       if(!customerName){
+        alert("Please Add Customer Name to Order..");
+       }
+        
+    }
+
 
     const foodItems = [
         { id: 1, name: "Burger", price: 5.99 },
@@ -84,7 +112,7 @@ const Home = () => {
                         <div className="row">
                             <div className="col-3 shadow-lg text-break">
                                 {/* <CustomerOrders customerOrders={[{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10}]}/>      */}
-                                <CustomerOrders customerOrders={customerOrderList} />
+                                <CustomerOrders customerOrders={customerOrderList} totalPrice={totalPrice} onChangeQuantityHandler={onChangeQuantityHandler} customerOrderListformHandler={customerOrderListformHandler}/>
                             </div>
                       
                            
