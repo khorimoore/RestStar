@@ -82,13 +82,13 @@ const Home = () => {
                 ) : (
                     
                         <div className="row">
-                            <div className="col-2 shadow-lg text-break">
+                            <div className="col-3 shadow-lg text-break">
                                 {/* <CustomerOrders customerOrders={[{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10},{id:1,name:'cofeee',price:10}]}/>      */}
                                 <CustomerOrders customerOrders={customerOrderList} />
                             </div>
                       
                            
-                            <div className="col-9 m-5 shadow-lg">
+                            <div className="col-8 m-5 shadow-lg">
                                 <MenuList menuLists={foodItems} addOrders={addOrders}/>
                             </div>    
                         </div>
