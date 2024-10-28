@@ -14,7 +14,6 @@ const CustomerList: React.FC<CustomerOrderProps> = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch('/api/orders'); 
-        
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
