@@ -110,7 +110,7 @@ const Home = () => {
                                 <MenuList menuLists={foodItems} addOrders={addOrders}/>
                             </div>    
                         </div>
-                    </div>
+                 
                 )}
         </>
     );
