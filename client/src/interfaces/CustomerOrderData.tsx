@@ -1,5 +1,5 @@
 export interface CustomerOrderData {
-    id: number | null;
+    id: number;
     name: string | null;
-    price: number | null;
+    price: number;
   }
