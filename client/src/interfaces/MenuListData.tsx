@@ -1,5 +1,5 @@
 export interface MenuListData {
-    id: number | null;
+    id: number;
     name: string | null;
     price: number | null;
 }

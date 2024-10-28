@@ -5,20 +5,21 @@ import type { MenuListData } from "../interfaces/MenuListData";
 
 // Define the props for the component
 interface MenuListProps {
-    menuLists: MenuListData[] | null; // users can be an array of UserData objects or null
+    menuLists: MenuListData[] | null;
+    addOrders: (id: number) => void // users can be an array of UserData objects or null
 }
 
-const MenuList: React.FC<MenuListProps> = ({ menuLists }) => {
+const MenuList: React.FC<MenuListProps> = ({ menuLists, addOrders }) => {
     return (
         <>
             <h2 className="pb-5">
-                Check out all your MenuList !
+                Check out all the MenuList !
             </h2>
             <div className="row align-center mb-5 shadow-sm" >
             {menuLists && menuLists.map((menuList) => (
 
                     <div className="col-2 m-2" key={menuList.id}>
-                        <button className='btn btn-info'>{menuList.id}. {menuList.name}</button>
+                        <button className='btn btn-info' onClick={() => addOrders(menuList.id)}>{menuList.id}. {menuList.name}</button>
                     </div>
             ))}
             </div>
@@ -27,3 +28,4 @@ const MenuList: React.FC<MenuListProps> = ({ menuLists }) => {
 };
 
 export default MenuList;
+
