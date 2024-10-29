@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "easyinvoice": "^3.0.47",
+    "file": "^0.2.2",
     "filesaver": "^0.0.13",
+    "fs": "^0.0.1-security",
+    "fs-react": "^0.0.4",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

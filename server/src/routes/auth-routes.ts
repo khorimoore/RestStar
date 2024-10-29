@@ -55,20 +55,14 @@ export const signup = async (req: Request, res: Response) => {
 
   try {
     // Hash the password before saving to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
+
 
     // Create a new user in the database
-    const newUser = await User.create({
-      username,
-      password: hashedPassword
-    });
+    const newUser = await User.create({username,password});
 
-    // Generate a JWT token for the new user
-    const secretKey = process.env.JWT_SECRET_KEY || '';
-    const token = jwt.sign({ newUser}, secretKey, { expiresIn: '1h' });
 
     // Send the token as a JSON response
-    return res.status(201).json({ token });
+    return res.status(201).json({ newUser });
   } catch (error) {
     console.error('Error creating user:', error);
     return res.status(500).json({ message: 'Internal server error' });
@@ -79,4 +73,3 @@ export const signup = async (req: Request, res: Response) => {
 
 // POST /signup - Sign up a new user
 router.post('/signup', signup);  // Define the signup route
-

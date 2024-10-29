@@ -6,21 +6,22 @@ import type { CustomerListData } from "../interfaces/CustomerListData";
 // Define the props for the component
 interface CustomerListProps {
 
-    customerLists: CustomerListData[] | null; // users can be an array of MenuData objects or null
-    addOrders(id:number):void
+    customerList: CustomerListData[] | null; // users can be an array of CustomerData objects or null
+    getInvoice:(data:string)=>void;
+  
 }
 
-const CustomerList: React.FC<CustomerListProps> = ({ customerLists,addOrders }) => {
+const CustomerList: React.FC<CustomerListProps> = ({ customerList, getInvoice }) => {
     return (
         <>
             <h2 className="pb-5">
                 Check out the customer List !
             </h2>
             <div className="row align-center mb-5 shadow-sm" >
-            {customerLists && customerLists.map((customerList) => (
+            {customerList && customerList.map((customerList) => (
 
-                    <div className="col-2 m-2" key={customerList.id}>
-                        <button className='btn btn-info' onClick={()=>addOrders(customerList.id)}>{customerList.id}. {customerList.name}</button>
+                    <div className="col-12 m-2" key={customerList.id}>
+                        <button className='btn btn-info' onClick={()=>getInvoice(customerList.orders[0].orderData)}>{customerList.id}. {customerList.customerName}</button>
                     </div>
             ))}
             </div>
