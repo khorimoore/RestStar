@@ -1,10 +1,11 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
+import { useNavigate } from "react-router-dom";  // Import useNavigate for navigation
 import Auth from '../utils/auth';  // Import the Auth utility for managing authentication state
 import { login } from "../api/authAPI";  // Import the login function from the API
 import { UserLogin } from "../interfaces/UserLogin";  // Import the interface for UserLogin
 
 const Login = () => {
+  const navigate = useNavigate();  // Initialize useNavigate hook
   // State to manage the login form data
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
@@ -28,10 +29,17 @@ const Login = () => {
       const data = await login(loginData);
       // If login is successful, call Auth.login to store the token in localStorage
       Auth.login(data.token);
+      navigate('/home');  // Adjust the path according to your home route
     } catch (err) {
       console.error('Failed to login', err);  // Log any errors that occur during login
     }
   };
+
+    // Function to navigate to the sign-up page
+    const handleSignUp = () => {
+      navigate('/signup');  // Redirect to the sign-up page
+    };
+  
 
   return (
     <div className='form-container'>
@@ -63,6 +71,9 @@ const Login = () => {
         <div className="form-group">
           <button className="btn btn-primary" type='submit'>Login</button>
         </div>
+        <div className="form-group">
+        <button className="btn btn-secondary" onClick={handleSignUp}>Sign Up</button>
+      </div>
       </form>
     </div>
   )

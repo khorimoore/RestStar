@@ -41,7 +41,7 @@ const Navbar = () => {
               
               </div>
               <div className="nav-item">
-                <NavLink to="/invoices" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Invoices</NavLink>
+                <NavLink to="/invoice" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Invoices</NavLink>
               
               </div>
             

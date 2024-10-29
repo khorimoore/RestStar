@@ -39,3 +39,44 @@ const router = Router();
 router.post('/login', login);  // Define the login route
 
 export default router;  // Export the router instance
+//----------------------------------------------------------------
+// Sign-up function to register a new user
+export const signup = async (req: Request, res: Response) => {
+  const { username, password } = req.body;  // Extract user details from request body
+
+  // Check if the user already exists
+  const existingUser = await User.findOne({
+    where: { username },
+  });
+
+  if (existingUser) {
+    return res.status(400).json({ message: 'Username already exists' });
+  }
+
+  try {
+    // Hash the password before saving to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user in the database
+    const newUser = await User.create({
+      username,
+      password: hashedPassword
+    });
+
+    // Generate a JWT token for the new user
+    const secretKey = process.env.JWT_SECRET_KEY || '';
+    const token = jwt.sign({ newUser}, secretKey, { expiresIn: '1h' });
+
+    // Send the token as a JSON response
+    return res.status(201).json({ token });
+  } catch (error) {
+    console.error('Error creating user:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
+// POST /signup - Sign up a new user
+router.post('/signup', signup);  // Define the signup route
+
