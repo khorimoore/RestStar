@@ -21,7 +21,7 @@ const CustomerList: React.FC<CustomerListProps> = ({ customerList, getInvoice })
             {customerList && customerList.map((customerList) => (
 
                     <div className="col-12 m-2" key={customerList.id}>
-                        <button className='btn btn-info' onClick={()=>getInvoice(customerList.orders[0].orderData)}>{customerList.id}. {customerList.customerName}</button>
+                        <button className='btn btn-dark' onClick={()=>getInvoice(customerList.orders[0].orderData)}>{customerList.id}. {customerList.customerName} Click to View Invoice</button>
                     </div>
             ))}
             </div>

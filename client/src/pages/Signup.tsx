@@ -25,7 +25,8 @@ const Signup = () => {
     try {
       // Call the sign-up API endpoint with signUpData
       const data = await signup(signUpData);
-      alert(data.username+' Registered');
+   
+      alert(data.newUser.username+' Registered');
       window.location.assign('/login');
     } catch (err) {
       console.error('Failed to sign up', err);  // Log any errors that occur during sign-up

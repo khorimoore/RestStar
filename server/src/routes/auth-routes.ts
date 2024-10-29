@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
   const passwordIsValid = await bcrypt.compare(password, user.password);
   // If password is invalid, send an authentication failed response
   if (!passwordIsValid) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    return res.status(401).json({ message: 'password Authentication failed' });
   }
 
   // Get the secret key from environment variables
