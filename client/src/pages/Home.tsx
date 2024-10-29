@@ -1,15 +1,16 @@
-import { useState, useEffect, useLayoutEffect, FormEvent } from "react";
-import { retrieveUsers } from "../api/userAPI";
-import type { UserData } from "../interfaces/UserData";
+import { useState, useEffect, useLayoutEffect, } from "react";
+// import { retrieveUsers } from "../api/userAPI";
+// import type { UserData } from "../interfaces/UserData";
 import type { CustomerOrderData } from "../interfaces/CustomerOrderData";
 import ErrorPage from "./ErrorPage";
 import MenuList from '../components/MenuList';
 import CustomerOrders from '../components/CustomerOrders';
 import auth from '../utils/auth';
+import { addCustomerOrders } from "../api/customerOrderAPI";
 
 const Home = () => {
 
-    const [users, setUsers] = useState<UserData[]>([]);
+    // const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);//error check
     const [loginCheck, setLoginCheck] = useState(false);//login check
     const [customerOrderList, setCustomerOrderList] = useState([] as CustomerOrderData[]);//customerOrderList
@@ -18,7 +19,7 @@ const Home = () => {
 
     useEffect(() => {
         if (loginCheck) {
-            fetchUsers();
+            // fetchUsers();
         }
     }, [loginCheck]);
 
@@ -32,15 +33,15 @@ const Home = () => {
         }
     };
 
-    const fetchUsers = async () => {
-        try {
-            const data = await retrieveUsers();
-            setUsers(data);
-        } catch (err) {
-            console.error('Failed to retrieve users:', err);
-            setError(true);
-        }
-    }
+    // const fetchUsers = async () => {
+    //     try {
+    //         const data = await retrieveUsers();
+    //         setUsers(data);
+    //     } catch (err) {
+    //         console.error('Failed to retrieve users:', err);
+    //         setError(true);
+    //     }
+    // }
     const addOrders = (id: number) => {
         // Find the food item by ID
         const foodItem = foodItems.filter(item => item.id === id);
@@ -60,6 +61,7 @@ const Home = () => {
                     const foodItem = foodItems.filter(item => item.id === foodItemid); // get the base price from 
                     if(item.id === foodItemid && customerorderIndex === index){
                         item.price = foodItem[0].price* parseInt(value); //set the price with the quantity multiplier
+                        item.quantity = value;
                     }
                     return item;
                 });
@@ -68,24 +70,28 @@ const Home = () => {
 
     }
     
-    const customerOrderListformHandler = (customerName:string)=>{
-       if(!customerName){
-        alert("Please Add Customer Name to Order..");
-       }else{
-        console.log(customerOrderList);
-       }
+    const customerOrderListformHandler = async (customerName:string)=>{
+        
+        try {
+            // Call the customer API endpoint with customer order data
+            await addCustomerOrders(customerName,customerOrderList);
+
+          } catch (err) {
+            console.error('Failed to login', err);  // Log any errors that occur during login
+            setError(true);
+          }
         
     }
 
 
     const foodItems = [
-        { id: 1, name: "Burger", price: 5.99 },
-        { id: 2, name: "Pizza", price: 8.99 },
-        { id: 3, name: "Pasta", price: 7.49 },
-        { id: 4, name: "Salad", price: 4.99 },
-        { id: 5, name: "Fries", price: 2.99 },
-        { id: 6, name: "Sandwich", price: 6.49 },
-        { id: 7, name: "Soup", price: 3.99 }
+        { id: 1, name: "Burger", price: 5.99,quantity:'1' },
+        { id: 2, name: "Pizza", price: 8.99 ,quantity:'1'},
+        { id: 3, name: "Pasta", price: 7.49,quantity:'1' },
+        { id: 4, name: "Salad", price: 4.99,quantity:'1' },
+        { id: 5, name: "Fries", price: 2.99 ,quantity:'1'},
+        { id: 6, name: "Sandwich", price: 6.49,quantity:'1' },
+        { id: 7, name: "Soup", price: 3.99 ,quantity:'1'}
     ];
 
     if (error) {
@@ -95,7 +101,7 @@ const Home = () => {
     return (
         <>
             {
-                loginCheck ? (
+                !loginCheck ? (
                     <div className='login-notice'>
                         <h1>Login to take Orders!</h1>
                     </div>

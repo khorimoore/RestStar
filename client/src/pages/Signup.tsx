@@ -1,13 +1,13 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import Auth from '../utils/auth';
-import { signUp } from "../api/authAPI";
+import { signup } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
 
-const SignUp = () => {
+const Signup = () => {
   // State to manage the sign-up form data
   const [signUpData, setSignUpData] = useState<UserLogin>({
     username: '',
-    password: ''
+    password: '',
   });
 
   // Handle changes in the input fields
@@ -24,7 +24,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       // Call the sign-up API endpoint with signUpData
-      const data = await signUp(signUpData);
+      const data = await signup(signUpData);
       // If sign-up is successful, call Auth.login to store the token in localStorage
       Auth.login(data.token);  // Assuming the API returns a token upon successful sign-up
     } catch (err) {
@@ -69,4 +69,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;
