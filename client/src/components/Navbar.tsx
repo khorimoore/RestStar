@@ -27,7 +27,7 @@ const Navbar = () => {
       <div>
         {
           // Conditional rendering based on loginCheck state
-          loginCheck ? (
+          !loginCheck ? (
             // Render login button if user is not logged in
             <button className="btn" type='button'>
               <Link to='/login'>Login</Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
             
             <div className="nav">
               <div className="nav-item">
-                <NavLink to="/home" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Home</NavLink>
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Home</NavLink>
               
               </div>
               <div className="nav-item">
