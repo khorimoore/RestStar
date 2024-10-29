@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { Customer } from '../../models/customer.js';
+import { Order } from '../../models/order.js';
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from 'jsonwebtoken';
 
@@ -46,7 +47,9 @@ router.post('/', async (req: Request, res: Response) => {
       try {
         const newCustomer = await Customer.create({customerName:customerName,userId:decoded.user.id});
         console.log(newCustomer);
-        console.log(orderData)
+        console.log(orderData);
+        const  orderDataString:string= JSON.stringify(orderData);
+        await Order.create({orderData:orderDataString,customerId:newCustomer.id})
         res.status(201).json(newCustomer);
       } catch (error: any) {
         res.status(400).json({ message: error.message });

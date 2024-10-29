@@ -74,7 +74,9 @@ const Home = () => {
         
         try {
             // Call the customer API endpoint with customer order data
-            await addCustomerOrders(customerName,customerOrderList);
+            const newCustomer = await addCustomerOrders(customerName,customerOrderList);
+            alert('Customer In Queue Name:'+newCustomer.customerName+'('+newCustomer.id+')');
+            window.location.assign('/invoice');
 
           } catch (err) {
             console.error('Failed to login', err);  // Log any errors that occur during login

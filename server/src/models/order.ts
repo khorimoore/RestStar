@@ -43,7 +43,7 @@ import {
     InferCreationAttributes<Order>
   > {
     declare id: CreationOptional<number>;
-    declare orderData: Text;
+    declare orderData: string;
     declare customerId: ForeignKey<Customer['id']>;
   }
   
@@ -57,7 +57,7 @@ import {
           allowNull: false,
         },
         orderData: {
-          type: DataTypes.TEXT,
+          type: DataTypes.STRING,
           allowNull: false,
     
         },
