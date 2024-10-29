@@ -4,23 +4,23 @@ import type { CustomerListData } from "../interfaces/CustomerListData";
 // import auth from '../utils/auth';
 
 // Define the props for the component
-interface MenuListProps {
+interface CustomerListProps {
 
-    menuLists: CustomerListDataListData[] | null; // users can be an array of MenuData objects or null
+    customerLists: CustomerListData[] | null; // users can be an array of MenuData objects or null
     addOrders(id:number):void
 }
 
-const MenuList: React.FC<CustomerListProps> = ({ customerLists,addOrders }) => {
+const CustomerList: React.FC<CustomerListProps> = ({ customerLists,addOrders }) => {
     return (
         <>
             <h2 className="pb-5">
-                Check out all the List !
+                Check out the customer List !
             </h2>
             <div className="row align-center mb-5 shadow-sm" >
-            {menuLists && menuLists.map((menuList) => (
+            {customerLists && customerLists.map((customerList) => (
 
-                    <div className="col-2 m-2" key={menuList.id}>
-                        <button className='btn btn-info' onClick={()=>addOrders(menuList.id)}>{menuList.id}. {menuList.name}</button>
+                    <div className="col-2 m-2" key={customerList.id}>
+                        <button className='btn btn-info' onClick={()=>addOrders(customerList.id)}>{customerList.id}. {customerList.name}</button>
                     </div>
             ))}
             </div>
@@ -28,5 +28,5 @@ const MenuList: React.FC<CustomerListProps> = ({ customerLists,addOrders }) => {
     );
 };
 
-export default MenuList;
+export default CustomerList;
 
