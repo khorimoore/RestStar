@@ -21,6 +21,6 @@ Customer.hasMany(Order, {
   });
   
 // The association can also be created 
-  Order.belongsTo(Customer);
+  Order.belongsTo(Customer,{ foreignKey: 'customerId' });
 
 export { User , Customer};
