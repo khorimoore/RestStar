@@ -1,6 +1,8 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { Customer } from '../../models/customer.js';
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -24,7 +26,7 @@ router.get('/:id', async (req: Request, res: Response) => {
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: 'Customer not found' });
     }
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -34,15 +36,24 @@ router.get('/:id', async (req: Request, res: Response) => {
 // POST /users - Create a new user
 router.post('/', async (req: Request, res: Response) => {
   const { customerName, orderData } = req.body;
-
-  try {
-    const newCustomer = await Customer.create(customerName);
-    console.log(newCustomer);
-    console.log(orderData)
-    res.status(201).json(newCustomer);
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+  console.log();
+  const authHeader = req.headers.authorization;
+  if(authHeader){
+      const token = authHeader.split(' ')[1];
+      const decoded:JwtPayload = jwtDecode(token);
+      console.log(decoded.user.id);
+    
+      try {
+        const newCustomer = await Customer.create({customerName:customerName,userId:decoded.user.id});
+        console.log(newCustomer);
+        console.log(orderData)
+        res.status(201).json(newCustomer);
+      } catch (error: any) {
+        res.status(400).json({ message: error.message });
+      }
   }
+  
+
 });
 
 // PUT /users/:id - Update a user by id

@@ -14,7 +14,7 @@ User.hasMany(Customer, {
   });
   
 // The association can also be created 
-Customer.belongsTo(User);
+Customer.belongsTo(User,{ foreignKey: 'userId' });
 //Customer has many orders
 Customer.hasMany(Order, {
     onDelete: 'CASCADE',
