@@ -1,14 +1,15 @@
 import easyinvoice, { InvoiceData } from 'easyinvoice';
 import { useState, useEffect } from 'react';
+import {CustomerListData} from '../interfaces/CustomerListData';
+import Invoice from '../components/Invoice.';
+import {retrieveCustomers} from '../api/customerListAPI';
 import CustomerList from '../components/CustomerList';
-import Invoice from '../components/Invoice';
-import retrieveCustomers from '../api/customerListAPI';
 
 
 const Customers = () => {
     const [error, setError] = useState(false);//error check
     const [loginCheck, setLoginCheck] = useState(false);//login check
-    const [customerList, setCustomerList] = useState([] as CustomerData[]);//customerList
+    const [customerList, setCustomerList] = useState([] as CustomerListData[]);//customerList
     const [totalPrice, setTotalPrice] = useState<number>(0);//total price
  
 
