@@ -27,7 +27,7 @@ const Signup = () => {
       const data = await signup(signUpData);
    
       alert(data.newUser.username+' Registered');
-      window.location.assign('/login');
+      window.location.assign('/');
     } catch (err) {
       console.error('Failed to sign up', err);  // Log any errors that occur during sign-up
     }
