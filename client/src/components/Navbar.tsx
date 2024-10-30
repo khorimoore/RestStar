@@ -37,11 +37,11 @@ const Navbar = () => {
             
             <div className="nav">
               <div className="nav-item">
-                <NavLink to="/" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Home</NavLink>
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'active btn ' : ' btn')}>Home</NavLink>
               
               </div>
               <div className="nav-item">
-                <NavLink to="/customers" className={({ isActive }) => (isActive ? 'active nav-link' : 'nav-link')}>Customers/Invoice</NavLink>
+                <NavLink to="/customers" className={({ isActive }) => (isActive ? 'active btn ' : ' btn')}>Customers/Invoice</NavLink>
               
               </div>
             

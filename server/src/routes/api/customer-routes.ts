@@ -8,13 +8,24 @@ import { JwtPayload } from 'jsonwebtoken';
 const router = express.Router();
 
 // GET /users - Get all users
-router.get('/', async (_req: Request, res: Response) => {
-  try {
-    const customers = await Customer.findAll();
-    res.json(customers);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
-  }
+router.get('/', async (req: Request, res: Response) => {
+
+
+    const authHeader = req.headers.authorization;
+    if(authHeader){
+        const token = authHeader.split(' ')[1];
+        const decoded:JwtPayload = jwtDecode(token);
+        try {
+            const customers = await Customer.findAll({
+                where:{userId:decoded.user.id},
+                include: [{ model: Order }],
+            });
+            res.json(customers);
+        } catch (error: any) {
+            res.status(500).json({ message: error.message });
+        }
+
+    }
 });
 
 // GET /users/:id - Get a user by id

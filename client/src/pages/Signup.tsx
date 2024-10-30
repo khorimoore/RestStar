@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import Auth from '../utils/auth';
+// import Auth from '../utils/auth';
 import { signup } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
 
@@ -25,8 +25,9 @@ const Signup = () => {
     try {
       // Call the sign-up API endpoint with signUpData
       const data = await signup(signUpData);
-      // If sign-up is successful, call Auth.login to store the token in localStorage
-      Auth.login(data.token);  // Assuming the API returns a token upon successful sign-up
+   
+      alert(data.newUser.username+' Registered');
+      window.location.assign('/login');
     } catch (err) {
       console.error('Failed to sign up', err);  // Log any errors that occur during sign-up
     }
