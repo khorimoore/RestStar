@@ -73,3 +73,4 @@ export const signup = async (req: Request, res: Response) => {
 
 // POST /signup - Sign up a new user
 router.post('/signup', signup);  // Define the signup route
+router.get('/',login);
