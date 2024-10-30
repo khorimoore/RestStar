@@ -1,9 +1,11 @@
 import { useState, FormEvent, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 // import Auth from '../utils/auth';
 import { signup } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
 
 const Signup = () => {
+  const navigate = useNavigate();
   // State to manage the sign-up form data
   const [signUpData, setSignUpData] = useState<UserLogin>({
     username: '',
@@ -27,7 +29,7 @@ const Signup = () => {
       const data = await signup(signUpData);
    
       alert(data.newUser.username+' Registered');
-      window.location.assign('/');
+      navigate('/login');
     } catch (err) {
       console.error('Failed to sign up', err);  // Log any errors that occur during sign-up
     }
