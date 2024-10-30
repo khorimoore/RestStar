@@ -1,4 +1,5 @@
 import { useState, useEffect, useLayoutEffect, } from "react";
+import { useNavigate } from "react-router-dom";
 // import { retrieveUsers } from "../api/userAPI";
 // import type { UserData } from "../interfaces/UserData";
 import type { CustomerOrderData } from "../interfaces/CustomerOrderData";
@@ -10,6 +11,7 @@ import { addCustomerOrders } from "../api/customerOrderAPI";
 
 const Home = () => {
 
+    const navigate = useNavigate();
     // const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);//error check
     const [loginCheck, setLoginCheck] = useState(false);//login check
@@ -76,7 +78,8 @@ const Home = () => {
             // Call the customer API endpoint with customer order data
             const newCustomer = await addCustomerOrders(customerName,customerOrderList);
             alert('Customer In Queue Name:'+newCustomer.customerName+'('+newCustomer.id+')');
-            window.location.assign('/customers');
+            // window.location.assign('/customers');
+             navigate('/customers');
 
           } catch (err) {
             console.error('Failed to login', err);  // Log any errors that occur during login
